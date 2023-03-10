@@ -1,13 +1,12 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const morgan = require("morgan");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
-const path = require("path");
-require("dotenv").config();
+const express = require('express');
+const mongoose = require('mongoose');
+const morgan = require('morgan');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+require('dotenv').config();
 
-const router = require("./routes");
-const handleError = require("./middlewares/handleError");
+const router = require('./routes');
+const handleError = require('./middlewares/handleError');
 
 const app = express();
 
@@ -15,24 +14,22 @@ const app = express();
 mongoose
   .connect(process.env.MONGO_DB)
   .then(() => {
-    console.log("✅ Connect DB successfully !");
+    console.log('✅ Connect DB successfully !');
   })
   .catch((err) => {
     console.log(err);
   });
 
 // middleware
-app.use(morgan("dev"));
-app.use("/static", express.static(path.join(__dirname, "public")));
+app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: `http://localhost:${process.env.PORT_CLIENT}`,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
-  })
+  }),
 );
 
 // routes
@@ -44,5 +41,5 @@ handleError(app);
 // port
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
-  console.log("✅ Server running on port " + port);
+  console.log('✅ Server running on port ' + port);
 });

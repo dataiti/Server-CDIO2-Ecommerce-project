@@ -1,31 +1,31 @@
-const cleanUser = (user) => {
-  if (user.email_code) user.email_code = undefined;
-  if (user.phone_code) user.phone_code = undefined;
-  if (user.forgot_password_code) user.forgot_password_code = undefined;
-  user.salt = undefined;
-  user.hashed_password = undefined;
-
-  user.isEmailActive = undefined;
-  user.isPhoneActive = undefined;
-  user.addresses = undefined;
-  user.e_wallet = undefined;
+const cleanUserLess = (user) => {
+  if (user.permissions) user.permissions = undefined;
+  if (user.wishlistIds) user.wishlistIds = undefined;
+  if (user.followStoreIds) user.followStoreIds = undefined;
+  if (user.refreshToken) user.refreshToken = undefined;
+  if (user.passwordChangedAt) user.passwordChangedAt = undefined;
+  if (user.passwordResetToken) user.passwordResetToken = undefined;
+  if (user.passwordResetExpires) user.passwordResetExpires = undefined;
+  user.password = undefined;
+  user.addressIds = undefined;
+  user.eWallet = undefined;
   // user.cart = undefined;
 
-  if (user.email) user.email = user.email.slice(0, 6) + "******";
-  if (user.phone) user.phone = "*******" + user.phone.slice(-3);
-  if (user.id_card) user.id_card = user.id_card.slice(0, 3) + "******";
+  if (user.email) user.email = user.email.slice(0, 6) + '******';
+  if (user.phone) user.phone = '*******' + user.phone.slice(-3);
 
   return user;
 };
 
-const cleanUserLess = (user) => {
-  if (user.email_code) user.email_code = undefined;
-  if (user.phone_code) user.phone_code = undefined;
-  if (user.forgot_password_code) user.forgot_password_code = undefined;
-  user.salt = undefined;
-  user.hashed_password = undefined;
+const cleanUserMore = (user) => {
+  if (user.permissions) user.permissions = undefined;
+  if (user.refreshToken) user.refreshToken = undefined;
+  if (user.passwordChangedAt) user.passwordChangedAt = undefined;
+  if (user.passwordResetToken) user.passwordResetToken = undefined;
+  if (user.passwordResetExpires) user.passwordResetExpires = undefined;
+  user.password = undefined;
 
   return user;
 };
 
-module.exports = { cleanUser, cleanUserLess };
+module.exports = { cleanUserLess, cleanUserMore };

@@ -7,10 +7,10 @@ const handleError = (app) => {
 
   app.use((err, req, res, next) => {
     const error = app.get('env') === 'development' ? err : {};
-    const status = err.status || 500;
+    const status = err.status || 200;
     return res.status(status).json({
-      error: error.message,
-      stack: error.stack,
+      success: false,
+      message: error.message,
     });
   });
 };
