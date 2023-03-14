@@ -396,10 +396,10 @@ const getListProductsByStore = asyncHandler(async (req, res) => {
     rating: { $gte: 0 },
   };
 
-  if (rating !== -1) filterArgs.rating.$gte = rating;
-  if (minPrice !== -1) filterArgs.price.$gte = minPrice;
-  if (maxPrice !== -1) filterArgs.price.$lte = maxPrice;
-  if (categoryId !== -1) filterArgs.categoryId.$in = categoryId;
+  // if (rating !== -1) filterArgs.rating.$gte = rating;
+  // if (minPrice !== -1) filterArgs.price.$gte = minPrice;
+  // if (maxPrice !== -1) filterArgs.price.$lte = maxPrice;
+  // if (categoryId !== -1) filterArgs.categoryId.$in = categoryId;
 
   const coutProducts = await Product.countDocuments(filterArgs);
 

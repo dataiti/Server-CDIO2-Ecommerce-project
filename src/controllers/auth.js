@@ -1,3 +1,5 @@
+const passport = require('passport');
+const FacebookStrategy = require('passport-facebook').Strategy;
 const User = require('../models/user');
 const asyncHandler = require('express-async-handler');
 const JWT = require('jsonwebtoken');
@@ -108,6 +110,35 @@ const refreshToken = asyncHandler(async (req, res) => {
     accessToken: newAccessToken,
   });
 });
+
+// passport.use(
+//   {
+//     clientID: process.env.FACEBOOK_APP_ID,
+//     clientSecret: process.env.FACEBOOK_APP_SECRET,
+//     callbackURL: 'http://localhost:3000/auth/facebook/callback',
+//   },
+//   async (accessToken, refreshToken, profile, done) => {
+//     try {
+//       const existingUser = await User.findOne({ facebookId: profile.id });
+
+//       if (existingUser) {
+//         done(null, existingUser);
+//       } else {
+//         const newUser = new User({
+//           facebookId: profile.id,
+//           displayName: profile.displayName,
+//           avatar: profile.avatar,
+//           email: profile.emails[0].name,
+//         });
+
+//         await newUser.save();
+//         done(null, newUser);
+//       }
+//     } catch (error) {
+//       done(error, null);
+//     }
+//   },
+// );
 
 const forgotPassword = asyncHandler(async (req, res) => {});
 

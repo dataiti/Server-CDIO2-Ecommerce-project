@@ -1,14 +1,13 @@
 const express = require('express');
-const { addCart, updateCart, removeCart, cartById, getListCartByUser } = require('../controllers/cart');
+const { addCart, updateCart, removeCart, removeCartItem, cartById, getListCartByUser } = require('../controllers/cart');
 const { userById } = require('../controllers/user');
 
 const router = express.Router();
 
 router.get('/list-carts', getListCartByUser);
 router.post('/add-cart/:userId', addCart);
-// router.get('/profile/:userId', getProfile);
-// router.put('/update-profile/:userId', updateProfile);
-// router.put('/replace-password/:userId', replacePassword);
+router.delete('/remove-cart/:userId', removeCart);
+router.delete('/remove-cart-item/:userId', removeCartItem);
 
 router.param('userId', userById);
 

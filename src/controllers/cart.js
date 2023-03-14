@@ -103,7 +103,19 @@ const addCart = asyncHandler(async (req, res) => {
 
 const updateCart = asyncHandler(async (req, res) => {});
 
-const removeCart = asyncHandler(async (req, res) => {});
+const removeCart = asyncHandler(async (req, res) => {
+  const { userId } = req.params;
+  const cart = await Cart.findOne({ userId });
+
+  if (!cart) throw new Error('Cart not found');
+
+  await CartItem.deleteMany({ cartId: cart._id });
+  await Cart.deleteOne({ _id: cart._id });
+});
+
+const removeCartItem = asyncHandler(async (req, res) => {
+  const cart = await Cart.findById();
+});
 
 const getListCartByUser = asyncHandler(async (req, res) => {
   const carts = await Cart.find();
@@ -114,6 +126,7 @@ const getListCartByUser = asyncHandler(async (req, res) => {
 module.exports = {
   addCart,
   updateCart,
+  removeCartItem,
   removeCart,
   cartById,
   getListCartByUser,

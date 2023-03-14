@@ -57,6 +57,15 @@ const userSchema = new mongoose.Schema(
       ],
       default: [],
     },
+    facebookId: {
+      type: String,
+    },
+    gooogleId: {
+      type: String,
+    },
+    storeId: {
+      type: String,
+    },
     refreshToken: {
       type: String,
     },

@@ -7,6 +7,7 @@ const {
   removeProduct,
   getProductLast7daysByStore,
   getListOfNewProducts,
+  getListProductsByUser,
   getListProductsByStore,
 } = require('../controllers/product');
 const { storeById } = require('../controllers/store');
@@ -17,6 +18,7 @@ const router = express.Router();
 // router.get('/list-users/admin', getAllUserForAdmin);
 router.get('/list-products/last-7days/:storeId', getProductLast7daysByStore);
 router.get('/list-products/by-store/:storeId', getListProductsByStore);
+router.get('/list-products/by-user', getListProductsByUser);
 router.get('/list-users/admin', getProduct);
 router.post('/create-product/:storeId', uploadCloud.array('images'), createProduct);
 router.put('/update-product/:storeId/:productId', uploadCloud.array('images'), updateProduct);

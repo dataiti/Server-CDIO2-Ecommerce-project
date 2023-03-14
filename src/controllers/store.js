@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const cloudinary = require('cloudinary').v2;
 const asyncHandler = require('express-async-handler');
 const Store = require('../models/store');
+const User = require('../models/user');
 const { cleanStore } = require('../helper/storeHandler');
 
 const storeById = asyncHandler(async (req, res, next, id) => {
@@ -34,7 +35,7 @@ const getStore = asyncHandler(async (req, res) => {
 });
 
 const getProfileStore = asyncHandler(async (req, res) => {
-  const store = await Store.findOne({ _id: req.store._id });
+  const store = await Store.findOne({ _id: req.store._id, ownerId: req.user._id });
 
   if (!store) throw new Error('Get profile store is unsuccessfully');
 
@@ -70,6 +71,14 @@ const createStore = asyncHandler(async (req, res) => {
     cloudinary.uploader.destroy(filenameAvatar);
     throw new Error('Create store is unsuccessfully');
   }
+
+  await User.findOneAndUpdate(
+    {
+      _id: req.user._id,
+    },
+    { $set: { storeId: newStore._id } },
+    { new: true },
+  );
 
   return res.status(200).json({
     success: true,
