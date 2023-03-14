@@ -102,23 +102,22 @@ const removeDelivery = asyncHandler(async (req, res) => {
 });
 
 const getListDeliveriesForAdmin = asyncHandler(async (req, res) => {
-  const search = req.query.q || '';
+  const search = req.query.search ? req.query.search : '';
   const regex = search
     .split(' ')
-    .filter((q) => q)
+    .filter((w) => w)
     .join('|');
-  const sortBy = req.query.sortBy || '_id';
-  const orderBy = req.query.orderBy || 'asc';
-  const limit = Number(req.query.limit) || 6;
-  const page = Number(req.query.limit) || 1;
-  let skip = (page - 1) * limit;
+
+  const sortBy = req.query.sortBy ? req.query.sortBy : '_id';
+  const orderBy =
+    req.query.orderBy && (req.query.orderBy == 'asc' || req.query.orderBy == 'desc') ? req.query.orderBy : 'asc';
+
+  const limit = req.query.limit && req.query.limit > 0 ? parseInt(req.query.limit) : 6;
+  const page = req.query.page && req.query.page > 0 ? parseInt(req.query.page) : 1;
+  let skip = limit * (page - 1);
 
   const filterArgs = {
-    $or: [
-      { name: { $regex: regex, $options: 'i' } },
-      { description: { $regex: regex, $options: 'i' } },
-      { price: { $regex: regex, $options: 'i' } },
-    ],
+    $or: [{ name: { $regex: regex, $options: 'i' } }, { description: { $regex: regex, $options: 'i' } }],
   };
 
   const countDeliveries = await Delivery.countDocuments(filterArgs);

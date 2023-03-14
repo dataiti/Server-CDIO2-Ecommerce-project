@@ -25,6 +25,10 @@ const deliverySchema = new mongoose.Schema(
     logo: {
       type: String,
     },
+    isActive: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true },
 );

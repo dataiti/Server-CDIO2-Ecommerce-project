@@ -78,7 +78,7 @@ const userSchema = new mongoose.Schema(
     passwordResetExpires: {
       type: String,
     },
-    isBlocked: {
+    isActive: {
       type: Boolean,
       default: false,
     },

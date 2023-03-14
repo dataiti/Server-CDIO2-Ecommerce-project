@@ -267,10 +267,6 @@ const getListStoresForAdmin = asyncHandler(async (req, res) => {
     .filter((w) => w)
     .join('|');
 
-  let isActive = [true, false];
-  if (req.query.isActive == 'true') isActive = [true];
-  if (req.query.isActive == 'false') isActive = [false];
-
   const sortBy = req.query.sortBy ? req.query.sortBy : '_id';
   const orderBy =
     req.query.orderBy && (req.query.orderBy == 'asc' || req.query.orderBy == 'desc') ? req.query.orderBy : 'asc';

@@ -207,7 +207,7 @@ const updateProduct = asyncHandler(async (req, res) => {
         listFilenameImages,
         storeId,
         categoryId,
-        optionStylesIds,
+        // optionStylesIds,
       },
     },
     { new: true },
@@ -290,9 +290,13 @@ const getProductLast7daysByStore = asyncHandler(async (req, res) => {
   });
 });
 
-const getStatsProductByStore = asyncHandler((req, res) => {});
+const getStatsProductByStore = asyncHandler(async (req, res) => {});
 
-const getListOfNewProducts = asyncHandler((req, res) => {});
+const getListOfNewProducts = asyncHandler(async (req, res) => {});
+
+const getOutStockProductsByStore = asyncHandler(async (req, res) => {});
+
+const getLockedProductsByStore = asyncHandler(async (req, res) => {});
 
 const getListProductsByUser = asyncHandler(async (req, res) => {
   const search = req.query.q ? req.query.q : '';

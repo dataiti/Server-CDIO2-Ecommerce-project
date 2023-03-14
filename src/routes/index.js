@@ -6,6 +6,7 @@ const deliveryRouter = require('./delivery');
 const storeRouter = require('./store');
 const productRouter = require('./product');
 const cartRouter = require('./cart');
+const orderRouter = require('./order');
 
 const router = (app) => {
   app.use('/api/v1/auth', authRouter);
@@ -16,6 +17,7 @@ const router = (app) => {
   app.use('/api/v1/store', storeRouter);
   app.use('/api/v1/product', productRouter);
   app.use('/api/v1/cart', cartRouter);
+  app.use('/api/v1/order', orderRouter);
 };
 
 module.exports = router;

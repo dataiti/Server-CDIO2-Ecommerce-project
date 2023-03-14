@@ -4,10 +4,10 @@ const { userById } = require('../controllers/user');
 
 const router = express.Router();
 
-router.get('/list-carts', getListCartByUser);
+router.get('/list-carts/:userId', getListCartByUser);
 router.post('/add-cart/:userId', addCart);
 router.delete('/remove-cart/:userId', removeCart);
-router.delete('/remove-cart-item/:userId', removeCartItem);
+router.delete('/remove-cart-item/:userId/:cartItemId', removeCartItem);
 
 router.param('userId', userById);
 
